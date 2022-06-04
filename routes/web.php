@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth']], function ()
+{
+    Route::group(['middleware' => ['cek_login:admin']], function ()
+    {
+        Route::resource('admin', HomeController::class);
+    });
+    Route::group(['middleware' => ['cek_login:pimpinan']], function ()
+    {
+        Route::resource('pimpinan', HomeController::class);
+    });
 });
