@@ -21,8 +21,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('level', ['admin', 'pimpinan'])->default('admin');
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
         });
     }
 
