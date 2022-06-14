@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('page.home');
+        return view('page.user.index', [
+            'data' => User::all()
+        ]);
     }
 
     /**
@@ -23,7 +26,9 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.user.form', [
+            'data' => User::latest('id', 'DESC')->take(3)->get()
+        ]);
     }
 
     /**
