@@ -7,6 +7,14 @@
 <div class="container">
     <div class="mb-4">
         <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary mb-3">Tambah</a>
+        @if (session('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered ">
                 <thead>
@@ -28,9 +36,21 @@
                         <td>{{ $row->username }}</td>
                         <td>{{ $row->level }}</td>
                         <td>
-                            <a href="{{ route('user.edit', ['user' => $row->id]) }}"
-                                class="btn btn-sm btn-warning">Edit</a>
-                            <a class="btn btn-sm btn-danger">Hapus</a>
+                            <a class="btn btn-sm btn-warning"
+                                href="{{ route('user.edit', ['user' => $row]) }}">
+                                    Edit</a>
+
+                            <form action="{{ route('user.destroy', ['user' => $row->id]) }}"
+                                style="display:inline-block"
+                                name="formDelete"
+                                method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-danger"
+                                    type="submit">
+                                    Hapus
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @empty
