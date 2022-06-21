@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +53,8 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
             'level' => 'required',
+        ],[
+            'required' => ':attribute harus di isi'
         ]);
         if ($validator->fails()) {
             return redirect()
@@ -111,19 +113,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->password != "") {
-            $user = new User();
-            $user->username = $request->username;
-            $user->name     = $request->name;
-            $user->email    = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->level    = $request->level;
-            $user->save();
-        }else{
-            $input = $request->except('password');
-            User::findOrFail($id)->update($input);
+
+        $input = $request->all();
+
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = Arr::except($input, array('password'));
         }
-        User::findOrFail($id)->update($request->all());
+
+        $user = User::find($id);
+        $user->update($input);
+
         return redirect()
             ->route('user.index')
             ->with('message', 'Data berhasil di update');

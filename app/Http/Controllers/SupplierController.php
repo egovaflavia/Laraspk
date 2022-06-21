@@ -14,7 +14,9 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.supplier.index', [
+            'data' => Supplier::all()
+        ]);
     }
 
     /**
@@ -24,7 +26,10 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.supplier.form', [
+            'data' => Supplier::latest('supplier_id', 'DESC')->take(3)->get(),
+            'route' => 'supplier.store'
+        ]);
     }
 
     /**

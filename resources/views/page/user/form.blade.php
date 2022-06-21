@@ -40,6 +40,14 @@
 
                     <div class="mb-3">
                         <label for="username">Username</label>
+                        @if($errors->has('username'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $errors->first('username') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         <div class="input-group">
                             <input type="text"
                                 class="form-control"
@@ -47,47 +55,55 @@
                                 name="username"
                                 placeholder="Username"
                                 value="{{ old('username') ?? $row->username ?? '' }}">
-                                @error('username')
-                                    <div class="invalid-feedback" style="width: 100%;">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                @if($errors->has('username'))
-                                    <div class="error">{{ $errors->first('username') }}</div>
-                                @endif
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email">Email </label>
+                        @if($errors->has('email'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $errors->first('email') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         <input type="email"
                             class="form-control"
                             id="email"
                             name="email"
                             placeholder="you@example.com"
-                            value="{{ old('email') ?? $row->email ?? '' }}"
-                            required>
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                            value="{{ old('email') ?? $row->email ?? '' }}">
                     </div>
                     <div class="mb-3">
-                        <label for="name">Name</label>
+                        <label for="name">Nama</label>
+                        @if($errors->has('name'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $errors->first('name') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         <div class="input-group">
                             <input type="text"
                                 class="form-control"
                                 id="name"
                                 name="name"
                                 placeholder="Name"
-                                value="{{ old('name') ?? $row->name ?? '' }}"
-                                required>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your username is required.
-                            </div>
+                                value="{{ old('name') ?? $row->name ?? '' }}">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="password">Password</label>
+                        @if($errors->has('password'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $errors->first('password') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         <div class="input-group">
                             <input type="password"
                                 class="form-control"
@@ -95,15 +111,21 @@
                                 name="password"
                                 placeholder="Password"
                                 value="{{ old('password') ?? '' ?? '' }}">
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your username is required.
-                            </div>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="address2">Level<span class="text-muted">(Optional)</span></label>
-                        <select name="level" class="custom-select d-block w-100" id="country" required>
+                        <label for="level">Level</label>
+                        @if($errors->has('level'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $errors->first('level') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        <select name="level" class="custom-select d-block w-100" id="country">
+                            <option value="">Pilih</option>
                             <option value="admin">Admin</option>
                             <option value="pimpinan">Pimpinan</option>
                         </select>

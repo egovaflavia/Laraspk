@@ -158,6 +158,13 @@ return [
     |
     */
 
-    'attributes' => [],
+    /** Ubah Nama Atribut */
+    'attributes' => [
+        'username' => 'Username',
+        'email' => 'Email',
+        'name' => 'Nama',
+        'password' => 'Password',
+        'level' => 'Level',
+    ],
 
 ];
