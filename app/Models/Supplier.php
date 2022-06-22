@@ -11,4 +11,10 @@ class Supplier extends Model
     protected $table      = 'tb_supplier';
     protected $primaryKey = 'supplier_id';
     public    $timestamps = false;
+    protected $fillable = [
+        'supplier_nama',
+        'supplier_alamat',
+        'supplier_email',
+        'supplier_notlp',
+    ];
 }

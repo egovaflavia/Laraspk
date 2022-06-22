@@ -74,8 +74,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('user.index')
-            ->with('message', 'Data berhasil disimpan')
-            ->withInput();
+            ->with('message', 'Data berhasil disimpan');
     }
 
     /**
@@ -136,12 +135,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::findOrFail($id)
-            ->delete();
+        $user->delete();
         return redirect()
             ->route('user.index')
-            ->with('message', 'Data berhasil di hapus');
+            ->with('message', 'Data berhasil dihapus');
     }
 }

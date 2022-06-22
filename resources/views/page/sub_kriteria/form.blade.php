@@ -55,6 +55,14 @@
                                 name="supplier_nama"
                                 placeholder="Nama Supplier"
                                 value="{{ old('supplier_nama') ?? $row->supplier_nama ?? '' }}">
+                                @error('supplier_nama')
+                                    <div class="invalid-feedback" style="width: 100%;">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                @if($errors->has('supplier_nama'))
+                                    <div class="error">{{ $errors->first('supplier_nama') }}</div>
+                                @endif
                         </div>
                     </div>
 
@@ -73,7 +81,8 @@
                             id="supplier_email"
                             name="supplier_email"
                             placeholder="you@example.com"
-                            value="{{ old('supplier_email') ?? $row->supplier_email ?? '' }}">
+                            value="{{ old('supplier_email') ?? $row->supplier_email ?? '' }}"
+                            required>
                     </div>
 
                     <div class="mb-3">
@@ -92,25 +101,18 @@
                                 id="supplier_notlp"
                                 name="supplier_notlp"
                                 placeholder="No Tlp"
-                                value="{{ old('supplier_notlp') ?? $row->supplier_notlp ?? '' }}">
+                                value="{{ old('supplier_notlp') ?? $row->supplier_notlp ?? '' }}"
+                                required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="alamat">Alamat</label>
-                        @if($errors->has('supplier_alamat'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('supplier_alamat') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        @endif
                         <div class="input-group">
                             <textarea   name="supplier_alamat"
                                         id="supplier_alamat"
                                         class="form-control"
-                                        rows="3">{{ old('supplier_alamat') ?? $row->supplier_alamat ?? '' }}
+                                        rows="3">{{ old('supplier_alamat') ?? $row->supplier_notlp ?? '' }}
                             </textarea>
                         </div>
                     </div>

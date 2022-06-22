@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="pricing-header px-3 py-3 pt-md-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-6">Tambah Data Supplier</h1>
+    <h1 class="display-6">Tambah Data Kriteria</h1>
 </div>
 
 <div class="container">
@@ -16,10 +16,10 @@
                     @forelse ($data as $r)
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
-                                <h6 class="my-0">{{ $r->supplier_nama }}</h6>
-                                <small class="text-muted">{{ $r->supplier_notlp }}</small>
+                                <h6 class="my-0">{{ $r->kriteria_nama }}</h6>
+                                <small class="text-muted">{{ $r->kriteria_bobot }}</small>
                             </div>
-                            <span class="text-muted">{{ $r->supplier_email }}</span>
+                            <span class="text-muted">{{ $r->kriteria_jenis }}</span>
                         </li>
                     @empty
                         Tidak ada data
@@ -29,9 +29,9 @@
 
             </div>
             <div class="col-md-7 order-md-1">
-                <h4 class="mb-3">Data Supplier</h4>
+                <h4 class="mb-3">Data Kriteria</h4>
                 <form class="needs-validation"
-                    action="{{ route($route, $row->supplier_id ?? null) }}"
+                    action="{{ route($route, $row->kriteria_id ?? null) }}"
                     method="POST">
                     @csrf
                     @if(isset($row))
@@ -39,10 +39,10 @@
                     @endif
 
                     <div class="mb-3">
-                        <label for="supplier_nama">Nama Supplier</label>
-                        @if($errors->has('supplier_nama'))
+                        <label for="kriteria_nama">Nama Kriteria</label>
+                        @if($errors->has('kriteria_nama'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('supplier_nama') }}
+                            {{ $errors->first('kriteria_nama') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -51,36 +51,44 @@
                         <div class="input-group">
                             <input type="text"
                                 class="form-control"
-                                id="supplier_nama"
-                                name="supplier_nama"
-                                placeholder="Nama Supplier"
-                                value="{{ old('supplier_nama') ?? $row->supplier_nama ?? '' }}">
+                                id="kriteria_nama"
+                                name="kriteria_nama"
+                                placeholder="Nama Kriteria"
+                                value="{{ old('kriteria_nama') ?? $row->kriteria_nama ?? '' }}">
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="supplier_email">Email Supplier </label>
-                        @if($errors->has('supplier_email'))
+                        <label for="kriteria_jenis">Jenis</label>
+                        @if($errors->has('kriteria_jenis'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('supplier_email') }}
+                            {{ $errors->first('kriteria_jenis') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         @endif
-                        <input type="text"
-                            class="form-control"
-                            id="supplier_email"
-                            name="supplier_email"
-                            placeholder="you@example.com"
-                            value="{{ old('supplier_email') ?? $row->supplier_email ?? '' }}">
+                        <div class="input-group">
+                            <select class="form-control"
+                                name="kriteria_jenis"
+                                id="kriteria_jenis">
+                                <option value="">Pilih</option>
+                                <option value="Core Factor">Core Factor</option>
+                                <option value="Secondary Factor">Secondary Factor</option>
+                            </select>
+                            <script>
+                                if (isset($row)) {
+                                    $('#kriteria_jenis').val('{{ $row->supplier_alamat ?? '' }}');
+                                }
+                            </script>
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="supplier_notlp">No Telp</label>
-                        @if($errors->has('supplier_notlp'))
+                        <label for="kriteria_bobot">Bobot</label>
+                        @if($errors->has('kriteria_bobot'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('supplier_notlp') }}
+                            {{ $errors->first('kriteria_bobot') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -89,29 +97,11 @@
                         <div class="input-group">
                             <input type="text"
                                 class="form-control"
-                                id="supplier_notlp"
-                                name="supplier_notlp"
-                                placeholder="No Tlp"
-                                value="{{ old('supplier_notlp') ?? $row->supplier_notlp ?? '' }}">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="alamat">Alamat</label>
-                        @if($errors->has('supplier_alamat'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('supplier_alamat') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        @endif
-                        <div class="input-group">
-                            <textarea   name="supplier_alamat"
-                                        id="supplier_alamat"
-                                        class="form-control"
-                                        rows="3">{{ old('supplier_alamat') ?? $row->supplier_alamat ?? '' }}
-                            </textarea>
+                                id="kriteria_bobot"
+                                name="kriteria_bobot"
+                                placeholder="Bobot"
+                                value="{{ old('kriteria_bobot') ?? $row->kriteria_bobot ?? '' }}"
+                                required>
                         </div>
                     </div>
 

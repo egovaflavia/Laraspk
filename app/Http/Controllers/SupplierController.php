@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SupplierController extends Controller
 {
@@ -40,7 +41,28 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'supplier_nama'   => 'required',
+            'supplier_alamat' => 'required',
+            'supplier_email'  => 'required',
+            'supplier_notlp'  => 'required',
+        ], [
+            'required' => ':attribute harus di isi'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('supplier.create')
+                ->with('message', 'Data gagal di simpan')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        Supplier::create($request->all());
+
+        return redirect()
+            ->route('supplier.index')
+            ->with('message', 'Data berhasil di simpan');
     }
 
     /**
@@ -51,7 +73,7 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        //
+
     }
 
     /**
@@ -62,7 +84,11 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('page.supplier.form',[
+            'row' => $supplier,
+            'data' => Supplier::latest('supplier_id', 'DESC')->take(3)->get(),
+            'route' => 'supplier.update'
+        ]);
     }
 
     /**
@@ -74,7 +100,11 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $supplier->update($request->all());
+
+        return redirect()
+            ->route('supplier.index')
+            ->with('message', 'Data berhasil di update');
     }
 
     /**
@@ -85,6 +115,9 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+        return redirect()
+            ->route('supplier.index')
+            ->with('message', 'Data berhasil di hapus');
     }
 }

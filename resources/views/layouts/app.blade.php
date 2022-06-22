@@ -34,7 +34,7 @@
                 <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
                 <a class="p-2 text-dark" href="{{ route('user.index') }}">User</a>
                 <a class="p-2 text-dark" href="{{ route('supplier.index') }}">Supplier</a>
-                <a class="p-2 text-dark" href="#">Kriteira</a>
+                <a class="p-2 text-dark" href="{{ route('kriteria.index') }}">Kriteira</a>
                 <a class="p-2 text-dark" href="#">Sub Kriteria</a>
                 <a class="p-2 text-dark" href="#">Profil Standar</a>
                 <a class="p-2 text-dark" href="#">GAP</a>

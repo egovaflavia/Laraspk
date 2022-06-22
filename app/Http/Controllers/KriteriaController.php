@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kriteria;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KriteriaController extends Controller
 {
@@ -14,7 +15,9 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.kriteria.index', [
+            'data' => Kriteria::all()
+        ]);
     }
 
     /**
@@ -24,7 +27,10 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.kriteria.form', [
+            'data' => Kriteria::latest('kriteria_id', 'DESC')->take(3)->get(),
+            'route' => 'kriteria.store'
+        ]);
     }
 
     /**
@@ -35,7 +41,27 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kriteria_nama'   => 'required',
+            'kriteria_jenis'  => 'required',
+            'kriteria_bobot'  => 'required|numeric',
+        ], [
+            'required' => ':attribute harus di isi',
+            'numeric' => ':attribute harus berupa angka'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('kriteria.create')
+                ->with('message', 'Data gagal di simpan')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        Kriteria::create($request->all());
+
+        return redirect()
+            ->route('kriteria.index')
+            ->with('message', 'Data berhasil di simpan');
     }
 
     /**
@@ -44,7 +70,7 @@ class KriteriaController extends Controller
      * @param  \App\Models\kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function show(kriteria $kriteria)
+    public function show(Kriteria $kriteria)
     {
         //
     }
@@ -55,7 +81,7 @@ class KriteriaController extends Controller
      * @param  \App\Models\kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit(kriteria $kriteria)
+    public function edit(Kriteria $kriteria)
     {
         //
     }
@@ -67,7 +93,7 @@ class KriteriaController extends Controller
      * @param  \App\Models\kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, kriteria $kriteria)
+    public function update(Request $request, Kriteria $kriteria)
     {
         //
     }
@@ -78,8 +104,11 @@ class KriteriaController extends Controller
      * @param  \App\Models\kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(kriteria $kriteria)
+    public function destroy($id)
     {
-        //
+        Kriteria::where('kriteria_id', $id)->delete();
+        return redirect()
+            ->route('kriteria.index')
+            ->with('message', 'Data berhasil di hapus');
     }
 }
