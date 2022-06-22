@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="mb-4">
-        <a href="{{ route('supplier.create') }}" class="btn btn-sm btn-primary mb-3">Tambah</a>
+        <a href="{{ route('sub_kriteria.create') }}" class="btn btn-sm btn-primary mb-3">Tambah</a>
         @if (session('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session()->get('message') }}
@@ -20,10 +20,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Supplier</th>
-                        <th>Alamat</th>
-                        <th>Email</th>
-                        <th>No Tlp</th>
+                        <th>Nama Sub Kriteria</th>
+                        <th>Kriteria</th>
+                        <th>Nilai</th>
                         <th>#</th>
                     </tr>
                 </thead>
@@ -31,16 +30,15 @@
                     @forelse ($data as $no => $row)
                     <tr>
                         <td>{{ ++$no }}</td>
-                        <td>{{ $row->supplier_nama }}</td>
-                        <td>{{ $row->supplier_alamat }}</td>
-                        <td>{{ $row->supplier_email }}</td>
-                        <td>{{ $row->supplier_notlp }}</td>
+                        <td>{{ $row->relKriteria->kriteria_nama }}</td>
+                        <td>{{ $row->sub_kriteria_nama }}</td>
+                        <td>{{ $row->sub_kriteria_nilai }}</td>
                         <td>
                             <a class="btn btn-sm btn-warning"
-                                href="{{ route('supplier.edit', ['supplier' => $row]) }}">
+                                href="{{ route('sub_kriteria.edit', ['sub_kriterium' => $row]) }}">
                                     Edit</a>
 
-                            <form action="{{ route('supplier.destroy', ['supplier' => $row]) }}"
+                            <form action="{{ route('sub_kriteria.destroy', ['sub_kriterium' => $row]) }}"
                                 style="display:inline-block"
                                 name="formDelete"
                                 method="post">

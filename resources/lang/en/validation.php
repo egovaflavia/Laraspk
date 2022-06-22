@@ -160,18 +160,21 @@ return [
 
     /** Ubah Nama Atribut */
     'attributes' => [
-        'username'        => 'Username',
-        'email'           => 'Email',
-        'name'            => 'Nama',
-        'password'        => 'Password',
-        'level'           => 'Level',
-        'supplier_nama'   => 'Nama Supplier',
-        'supplier_alamat' => 'Alamat Supplier',
-        'supplier_email'  => 'Email Supplier',
-        'supplier_notlp'  => 'No Tlp Supplier',
-        'kriteria_nama'   => 'Nama Kriteria',
-        'kriteria_jenis'  => 'Jenis Kriteria',
-        'kriteria_bobot'  => 'Bobot Kriteria',
+        'username'           => 'Username',
+        'email'              => 'Email',
+        'name'               => 'Nama',
+        'password'           => 'Password',
+        'level'              => 'Level',
+        'supplier_nama'      => 'Nama Supplier',
+        'supplier_alamat'    => 'Alamat Supplier',
+        'supplier_email'     => 'Email Supplier',
+        'supplier_notlp'     => 'No Tlp Supplier',
+        'kriteria_nama'      => 'Nama Kriteria',
+        'kriteria_jenis'     => 'Jenis Kriteria',
+        'kriteria_bobot'     => 'Bobot Kriteria',
+        'kriteria_id'        => 'Kriteria',
+        'sub_kriteria_nama'  => 'Nama Sub Kriteria',
+        'sub_kriteria_nilai' => 'Nilai Sub Kriteria',
     ],
 
 ];

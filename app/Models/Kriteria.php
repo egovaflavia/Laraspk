@@ -16,4 +16,5 @@ class Kriteria extends Model
         'kriteria_jenis',
         'kriteria_bobot',
     ];
+
 }

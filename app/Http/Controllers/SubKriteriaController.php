@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kriteria;
 use App\Models\Sub_kriteria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SubKriteriaController extends Controller
 {
@@ -14,7 +16,9 @@ class SubKriteriaController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.sub_kriteria.index', [
+            'data' => Sub_kriteria::all()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class SubKriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.sub_kriteria.form', [
+            'kriteria' => Kriteria::all(),
+            'route' => 'sub_kriteria.store'
+        ]);
     }
 
     /**
@@ -35,7 +42,28 @@ class SubKriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kriteria_id'        => 'required',
+            'sub_kriteria_nama'  => 'required',
+            'sub_kriteria_nilai' => 'required|numeric',
+        ], [
+            'required' => ':attribute harus di isi',
+            'numeric'  => ':attribute harus berupa angka',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('sub_kriteria.create')
+                ->with('message', 'Data gagal di simpan')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        Sub_kriteria::create($request->all());
+
+        return redirect()
+            ->route('sub_kriteria.index')
+            ->with('message', 'Data berhasil di simpan');
     }
 
     /**
@@ -80,6 +108,9 @@ class SubKriteriaController extends Controller
      */
     public function destroy(Sub_kriteria $sub_kriteria)
     {
-        //
+        $sub_kriteria->delete();
+        return redirect()
+        ->route('sub_kriteria.index')
+        ->with('message', 'Data berhasil di hapus');
     }
 }
