@@ -14,7 +14,9 @@ class GapController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.gap.index', [
+            'data' => Gap::all()
+        ]);
     }
 
     /**

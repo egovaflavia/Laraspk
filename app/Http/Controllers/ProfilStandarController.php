@@ -14,7 +14,10 @@ class ProfilStandarController extends Controller
      */
     public function index()
     {
-        //
+        return view('page.profil_standar.index', [
+            'data' => Profil_standar::all(),
+            'route' => 'profil_standar.update'
+        ]);
     }
 
     /**
@@ -57,7 +60,10 @@ class ProfilStandarController extends Controller
      */
     public function edit(Profil_standar $profil_standar)
     {
-        //
+        return view('page.profil_standar.form',[
+            'row' => $profil_standar,
+            'route' => 'profil_standar.update'
+        ]);
     }
 
     /**

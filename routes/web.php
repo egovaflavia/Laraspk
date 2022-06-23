@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\ProfilStandarController;
 use App\Http\Controllers\SubKriteriaController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
@@ -36,6 +38,8 @@ Route::group(['middleware' => ['auth']], function ()
         Route::resource('supplier', SupplierController::class);
         Route::resource('kriteria', KriteriaController::class);
         Route::resource('sub_kriteria', SubKriteriaController::class);
+        Route::resource('gap', GapController::class);
+        Route::resource('profil_standar', ProfilStandarController::class);
     });
     Route::group(['middleware' => ['cek_login:pimpinan']], function ()
     {

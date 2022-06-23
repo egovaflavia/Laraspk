@@ -34,10 +34,10 @@
                 <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
                 <a class="p-2 text-dark" href="{{ route('user.index') }}">User</a>
                 <a class="p-2 text-dark" href="{{ route('supplier.index') }}">Supplier</a>
-                <a class="p-2 text-dark" href="{{ route('kriteria.index') }}">Kriteira</a>
+                <a class="p-2 text-dark" href="{{ route('kriteria.index') }}">Kriteria</a>
                 <a class="p-2 text-dark" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a>
-                <a class="p-2 text-dark" href="#">Profil Standar</a>
-                <a class="p-2 text-dark" href="#">GAP</a>
+                <a class="p-2 text-dark" href="{{ route('profil_standar.index') }}">Profil Standar</a>
+                <a class="p-2 text-dark" href="{{ route('gap.index') }}">GAP</a>
                 <a class="p-2 text-dark" href="#">Penilaian</a>
                 <a class="p-2 text-dark" href="#">Perhitungan</a>
                 <a class="p-2 text-dark" href="#">Hasil</a>

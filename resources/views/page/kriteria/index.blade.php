@@ -36,7 +36,7 @@
                         <td>
                             <a class="btn btn-sm btn-warning"
                                 href="{{ route('kriteria.edit', ['kriterium' => $row]) }}">
-                                    Edit</a>
+                                    <strong>Edit</strong></a>
 
                             <form action="{{ route('kriteria.destroy', ['kriterium' => $row->kriteria_id]) }}"
                                 style="display:inline-block"
@@ -46,7 +46,7 @@
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger"
                                     type="submit">
-                                    Hapus
+                                    <strong>Hapus</strong>
                                 </button>
                             </form>
                         </td>

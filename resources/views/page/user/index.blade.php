@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="mb-4">
-        <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary mb-3">Tambah</a>
+        <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary mb-3"><strong>Tambah</strong></a>
         @if (session('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session()->get('message') }}
@@ -38,7 +38,7 @@
                         <td>
                             <a class="btn btn-sm btn-warning"
                                 href="{{ route('user.edit', ['user' => $row]) }}">
-                                    Edit</a>
+                                    <strong>Edit</strong></a>
 
                             <form action="{{ route('user.destroy', ['user' => $row]) }}"
                                 style="display:inline-block"
@@ -48,7 +48,7 @@
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger"
                                     type="submit">
-                                    Hapus
+                                    <strong>Hapus</strong>
                                 </button>
                             </form>
                         </td>
