@@ -85,7 +85,12 @@ class SubKriteriaController extends Controller
      */
     public function edit(Sub_kriteria $sub_kriteria)
     {
-        //
+        return view('page.sub_kriteria.form',[
+            'row'      => $sub_kriteria,
+            'data'     => Sub_kriteria::latest('sub_kriteria_id', 'DESC')->take(3)->get(),
+            'kriteria' => Kriteria::all(),
+            'route'    => 'sub_kriteria.update'
+        ]);
     }
 
     /**

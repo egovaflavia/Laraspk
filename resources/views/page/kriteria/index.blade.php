@@ -38,7 +38,7 @@
                                 href="{{ route('kriteria.edit', ['kriterium' => $row]) }}">
                                     <strong>Edit</strong></a>
 
-                            <form action="{{ route('kriteria.destroy', ['kriterium' => $row->kriteria_id]) }}"
+                            {{-- <form action="{{ route('kriteria.destroy', ['kriterium' => $row->kriteria_id]) }}"
                                 style="display:inline-block"
                                 name="formDelete"
                                 method="post">
@@ -48,7 +48,7 @@
                                     type="submit">
                                     <strong>Hapus</strong>
                                 </button>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                     @empty
