@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PeritunganController;
 use App\Http\Controllers\GapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
@@ -40,6 +41,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::resource('sub_kriteria', SubKriteriaController::class);
         Route::resource('gap', GapController::class);
         Route::resource('profil_standar', ProfilStandarController::class);
+        Route::resource('penilaian', PeritunganController::class);
     });
     Route::group(['middleware' => ['cek_login:pimpinan']], function ()
     {

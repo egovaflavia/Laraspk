@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('content')
 <div class="pricing-header px-3 py-3 pt-md-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-6">Tambah Data Sub Kriteria</h1>
+    <h1 class="display-6">Tambah Data Penilaian</h1>
 </div>
 
 <div class="container">
     <div class="mb-4">
-        <a href="{{ route('sub_kriteria.index') }}" class="btn btn-sm btn-primary mb-3"><strong>Kembali</strong></a>
+        <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary mb-3"><strong>Kembali</strong></a>
         <div class="row">
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Data Kriteria</span>
+                    <span class="text-muted">Kriteria</span>
                 </h4>
                 <ul class="list-group mb-3">
-                    @forelse ($kriteria as $r)
+                    @forelse ($dataKriteria as $r)
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
                                 <h6 class="my-0">{{ $r->kriteria_nama }}</h6>
@@ -29,47 +29,42 @@
 
             </div>
             <div class="col-md-7 order-md-1">
-                <h4 class="mb-3">Data Sub Kriteria</h4>
+                <h4 class="mb-3">Data User</h4>
                 <form class="needs-validation"
-                    action="{{ route($route, $row->sub_kriteria_id ?? null) }}"
+                    action="{{ route($route, $row->id ?? null) }}"
                     method="POST">
                     @csrf
                     @if(isset($row))
                         @method('PATCH')
                     @endif
+                    @if (isset($suppliers))
 
-                    <div class="mb-3">
-                        <label for="kriteria_id">Kriteria</label>
-                        @if($errors->has('kriteria_id'))
+                        @if($errors->has('supplier_id'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('kriteria_id') }}
+                            {{ $errors->first('supplier_id') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         @endif
-                        <div class="input-group">
-                            <select name="kriteria_id"
-                                    class="form-control"
-                                    id="kriteria_id">
-                                    <option value="">Pilih</option>
-                                    @foreach ($kriteria as $rowK)
-                                        <option value="{{ $rowK->kriteria_id }}">{{ $rowK->kriteria_nama }}</option>
-                                    @endforeach
+                        <div class="mb-3">
+                            <label for="name">Supplier</label>
+                            <select name="supplier_id"
+                                class="form-control @error('supplier_id') {{ 'is-invalid' }} @enderror"
+                                id="supplier_id">
+                                <option value="">Pilih</option>
+                                @foreach($suppliers as $dataSupplier)
+                                    <option value="{{ $dataSupplier->supplier_id }}">{{ $dataSupplier->supplier_nama }}</option>
+                                @endforeach
                             </select>
-                            @if (isset($rowS))
-                                <script>
-                                    $('#kriteria_id').val('{{ $rowS->kriteria_id }}');
-                                </script>
-                            @endif
                         </div>
-                    </div>
+                    @endif
 
                     <div class="mb-3">
-                        <label for="sub_kriteria_nama">Nama Sub Kriteria</label>
-                        @if($errors->has('sub_kriteria_nama'))
+                        <label for="name">Quality</label>
+                        @if($errors->has('name'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('sub_kriteria_nama') }}
+                            {{ $errors->first('name') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -78,34 +73,48 @@
                         <div class="input-group">
                             <input type="text"
                                 class="form-control"
-                                id="sub_kriteria_nama"
-                                name="sub_kriteria_nama"
-                                placeholder="Nama Sub Kriteria"
-                                value="{{ old('sub_kriteria_nama') ?? $row->sub_kriteria_nama ?? '' }}">
+                                id="name"
+                                name="name"
+                                placeholder="Name"
+                                value="{{ old('name') ?? $row->name ?? '' }}">
                         </div>
                     </div>
-
                     <div class="mb-3">
-                        <label for="sub_kriteria_nilai">Nilai</label>
-                        @if($errors->has('sub_kriteria_nilai'))
+                        <label for="password">Password</label>
+                        @if($errors->has('password'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $errors->first('sub_kriteria_nilai') }}
+                            {{ $errors->first('password') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         @endif
                         <div class="input-group">
-                            <input type="text"
+                            <input type="password"
                                 class="form-control"
-                                id="sub_kriteria_nilai"
-                                name="sub_kriteria_nilai"
-                                placeholder="Nilai"
-                                value="{{ old('sub_kriteria_nilai') ?? $row->sub_kriteria_nilai ?? '' }}"
-                                required>
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                value="{{ old('password') ?? '' ?? '' }}">
                         </div>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="level">Level</label>
+                        @if($errors->has('level'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $errors->first('level') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        <select name="level" class="custom-select d-block w-100" id="country">
+                            <option value="">Pilih</option>
+                            <option value="admin">Admin</option>
+                            <option value="pimpinan">Pimpinan</option>
+                        </select>
+                    </div>
                     <hr class="mb-4">
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Simpan</button>
                 </form>

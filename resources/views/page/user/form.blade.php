@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="mb-4">
-        <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary mb-3">Kembali</a>
+        <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary mb-3"><strong>Kembali</strong></a>
         <div class="row">
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">

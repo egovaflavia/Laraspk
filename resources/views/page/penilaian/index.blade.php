@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="pricing-header px-3 py-3 pt-md-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-6">List Data Sub Kriteria</h1>
+    <h1 class="display-6">List Data Penilaian</h1>
 </div>
 
 <div class="container">
     <div class="mb-4">
-        {{-- <a href="{{ route('sub_kriteria.create') }}" class="btn btn-sm btn-primary mb-3"><strong>Tambah</strong></a> --}}
+        <a href="{{ route('penilaian.create') }}" class="btn btn-sm btn-primary mb-3"><strong>Tambah</strong></a>
         @if (session('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session()->get('message') }}
@@ -20,9 +20,11 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Sub Kriteria</th>
-                        <th>Kriteria</th>
-                        <th>Nilai</th>
+                        <th>Nama Supplier</th>
+                        <th>Quality</th>
+                        <th>Cost</th>
+                        <th>Delivery</th>
+                        <th>Responsiveness</th>
                         <th>#</th>
                     </tr>
                 </thead>
@@ -30,15 +32,17 @@
                     @forelse ($data as $no => $row)
                     <tr>
                         <td>{{ ++$no }}</td>
-                        <td>{{ $row->relKriteria->kriteria_nama }}</td>
-                        <td>{{ $row->sub_kriteria_nama }}</td>
-                        <td>{{ $row->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relSupplier->supplier_nama }}</td>
+                        <td>{{ $row->relC1->sub_kriteria_nama }}</td>
+                        <td>{{ $row->relC2->sub_kriteria_nama }}</td>
+                        <td>{{ $row->relC3->sub_kriteria_nama }}</td>
+                        <td>{{ $row->relC4->sub_kriteria_nama }}</td>
                         <td>
                             <a class="btn btn-sm btn-warning"
-                                href="{{ route('sub_kriteria.edit', ['sub_kriterium' => $row]) }}">
+                                href="{{ route('penilaian.edit', ['penilaian' => $row]) }}">
                                     <strong>Edit</strong></a>
 
-                            {{-- <form action="{{ route('sub_kriteria.destroy', ['sub_kriterium' => $row]) }}"
+                            <form action="{{ route('penilaian.destroy', ['penilaian' => $row]) }}"
                                 style="display:inline-block"
                                 name="formDelete"
                                 method="post">
@@ -48,14 +52,16 @@
                                     type="submit">
                                     <strong>Hapus</strong>
                                 </button>
-                            </form> --}}
+                            </form>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" ><center>Tidak ada data</center></td>
+                        <td colspan="6">TIdak ada data</td>
                     </tr>
                     @endforelse
+
+
                 </tbody>
             </table>
         </div>

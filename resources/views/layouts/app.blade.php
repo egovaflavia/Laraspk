@@ -38,7 +38,7 @@
                 <a class="p-2 text-dark" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a>
                 <a class="p-2 text-dark" href="{{ route('profil_standar.index') }}">Profil Standar</a>
                 <a class="p-2 text-dark" href="{{ route('gap.index') }}">GAP</a>
-                <a class="p-2 text-dark" href="#">Penilaian</a>
+                <a class="p-2 text-dark" href="{{ route('penilaian.index') }}">Penilaian</a>
                 <a class="p-2 text-dark" href="#">Perhitungan</a>
                 <a class="p-2 text-dark" href="#">Hasil</a>
             @endauth
