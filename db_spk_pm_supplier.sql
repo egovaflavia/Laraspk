@@ -42,6 +42,22 @@ INSERT INTO `tb_kriteria` (`kriteria_id`, `kriteria_nama`, `kriteria_jenis`, `kr
 (3,	'Delivery',	'Secondary Factor',	40.00),
 (4,	'Responsiveness',	'Secondary Factor',	40.00);
 
+DROP TABLE IF EXISTS `tb_perhitungan`;
+CREATE TABLE `tb_perhitungan` (
+  `perhitungan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `supplier_id` bigint(20) unsigned NOT NULL,
+  `perhitungan_c1` int(11) NOT NULL,
+  `perhitungan_c2` int(11) NOT NULL,
+  `perhitungan_c3` int(11) NOT NULL,
+  `perhitungan_c4` int(11) NOT NULL,
+  PRIMARY KEY (`perhitungan_id`),
+  KEY `supplier_id` (`supplier_id`),
+  CONSTRAINT `tb_perhitungan_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `tb_supplier` (`supplier_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `tb_perhitungan` (`perhitungan_id`, `supplier_id`, `perhitungan_c1`, `perhitungan_c2`, `perhitungan_c3`, `perhitungan_c4`) VALUES
+(1,	1,	1,	1,	1,	1);
+
 DROP TABLE IF EXISTS `tb_profil_standar`;
 CREATE TABLE `tb_profil_standar` (
   `profil_standar_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -55,23 +71,39 @@ CREATE TABLE `tb_profil_standar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `tb_profil_standar` (`profil_standar_id`, `kriteria_id`, `sub_kriteria_id`) VALUES
-(1,	1,	1);
+(1,	1,	1),
+(2,	2,	2),
+(3,	3,	3),
+(4,	4,	4);
 
 DROP TABLE IF EXISTS `tb_sub_kriteria`;
 CREATE TABLE `tb_sub_kriteria` (
   `sub_kriteria_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `kriteria_id` bigint(20) unsigned NOT NULL,
   `sub_kriteria_nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sub_kriteria_nilai` double(8,2) NOT NULL,
+  `sub_kriteria_nilai` int(11) NOT NULL,
   PRIMARY KEY (`sub_kriteria_id`),
   KEY `kriteria_id` (`kriteria_id`),
   CONSTRAINT `tb_sub_kriteria_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `tb_kriteria` (`kriteria_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `tb_sub_kriteria` (`sub_kriteria_id`, `kriteria_id`, `sub_kriteria_nama`, `sub_kriteria_nilai`) VALUES
-(1,	1,	'Deserunt dolor neces',	123.00),
-(2,	1,	'Voluptatum autem cum',	123.00),
-(3,	1,	'Blanditiis laboriosa',	1.00);
+(1,	1,	'Sangat Baik',	1),
+(2,	1,	'Baik',	2),
+(3,	1,	'Kurang',	3),
+(4,	1,	'Sangat Kurang',	4),
+(5,	2,	'Sangat Mahal',	1),
+(6,	2,	'Mahal',	2),
+(7,	2,	'Murah',	3),
+(8,	2,	'Sangat Murah',	4),
+(9,	3,	'Sangat Cepat',	1),
+(10,	3,	'Cepat',	2),
+(11,	3,	'Lambat',	3),
+(12,	3,	'Sangat Lambat',	4),
+(13,	4,	'Sangat Cepat',	1),
+(14,	4,	'Cepat',	2),
+(15,	4,	'Lambat',	3),
+(16,	4,	'Sangat Lambat',	4);
 
 DROP TABLE IF EXISTS `tb_supplier`;
 CREATE TABLE `tb_supplier` (
@@ -105,4 +137,4 @@ INSERT INTO `tb_user` (`id`, `name`, `email`, `username`, `level`, `password`) V
 (11,	'Adminstrator',	'admin@mail.com',	'admin',	'admin',	'$2y$10$9uDRxBWheZngmUSjAgOmO.wj6BBIGyS/i5xJ3nxYfihWV6vKSRQFO'),
 (15,	'Hiram Mcdaniel',	'pimpinan@mail.com',	'pimpinan',	'pimpinan',	'$2y$10$ghhcmq9mkWAHpXWysTp7/eZ9aDmw2RYny.0rlyL7NX4RMRvDCfsPG');
 
--- 2022-06-23 09:47:56
+-- 2022-06-24 10:27:10
