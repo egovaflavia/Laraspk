@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="mb-4">
-        <a href="{{ route('supplier.index') }}" class="btn btn-sm btn-primary mb-3"><strong>Kembali</strong></a>
+        <a href="{{ route('kriteria.index') }}" class="btn btn-sm btn-primary mb-3"><strong>Kembali</strong></a>
         <div class="row">
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -31,7 +31,7 @@
             <div class="col-md-7 order-md-1">
                 <h4 class="mb-3">Data Kriteria</h4>
                 <form class="needs-validation"
-                    action="{{ route($route, $row->kriteria_id ?? null) }}"
+                    action="{{ route($route, ['kriterium' => $row] ?? null) }}"
                     method="POST">
                     @csrf
                     @if(isset($row))
@@ -54,6 +54,7 @@
                                 id="kriteria_nama"
                                 name="kriteria_nama"
                                 placeholder="Nama Kriteria"
+                                readonly
                                 value="{{ old('kriteria_nama') ?? $row->kriteria_nama ?? '' }}">
                         </div>
                     </div>
@@ -76,11 +77,11 @@
                                 <option value="Core Factor">Core Factor</option>
                                 <option value="Secondary Factor">Secondary Factor</option>
                             </select>
+                            @if(isset($row))
                             <script>
-                                if (isset($row)) {
-                                    $('#kriteria_jenis').val('{{ $row->supplier_alamat ?? '' }}');
-                                }
+                                $('#kriteria_jenis').val('{{ $row->kriteria_jenis }}');
                             </script>
+                            @endif
                         </div>
                     </div>
 

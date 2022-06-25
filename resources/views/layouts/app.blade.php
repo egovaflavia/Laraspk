@@ -24,7 +24,7 @@
 
 <body>
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="no-print d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">Sistem Pendukung Keputusan</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             @guest
@@ -39,8 +39,8 @@
                 <a class="p-2 text-dark" href="{{ route('profil_standar.index') }}">Profil Standar</a>
                 <a class="p-2 text-dark" href="{{ route('gap.index') }}">GAP</a>
                 <a class="p-2 text-dark" href="{{ route('penilaian.index') }}">Penilaian</a>
-                <a class="p-2 text-dark" href="#">Perhitungan</a>
-                <a class="p-2 text-dark" href="#">Hasil</a>
+                <a class="p-2 text-dark" href="{{ route('perhitungan') }}">Perhitungan</a>
+                <a class="p-2 text-dark" href="{{ route('hasil') }}">Hasil</a>
             @endauth
         </nav>
         @auth
@@ -50,7 +50,7 @@
 
     @yield('content')
 
-    <div class="container">
+    <div class="no-print container">
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
                 <div class="col-12 col-md">

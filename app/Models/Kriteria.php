@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Profil_standar;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kriteria extends Model
 {
@@ -11,6 +12,7 @@ class Kriteria extends Model
     protected $table      = 'tb_kriteria';
     protected $primaryKey = 'kriteria_id';
     public    $timestamps = false;
+    // protected $with = ['relProfil'];
     protected $fillable   = [
         'kriteria_nama',
         'kriteria_jenis',

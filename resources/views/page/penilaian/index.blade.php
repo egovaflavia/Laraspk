@@ -42,7 +42,7 @@
                                 href="{{ route('penilaian.edit', ['penilaian' => $row]) }}">
                                     <strong>Edit</strong></a>
 
-                            <form action="{{ route('penilaian.destroy', ['penilaian' => $row]) }}"
+                            <form action="{{ route('penilaian.destroy', ['penilaian' => $row->perhitungan_id]) }}"
                                 style="display:inline-block"
                                 name="formDelete"
                                 method="post">
@@ -60,8 +60,6 @@
                         <td colspan="6">TIdak ada data</td>
                     </tr>
                     @endforelse
-
-
                 </tbody>
             </table>
         </div>

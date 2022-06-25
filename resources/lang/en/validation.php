@@ -175,6 +175,11 @@ return [
         'kriteria_id'        => 'Kriteria',
         'sub_kriteria_nama'  => 'Nama Sub Kriteria',
         'sub_kriteria_nilai' => 'Nilai Sub Kriteria',
+        'supplier_id'        => 'Supplier',
+        'perhitungan_c1'     => 'Quality',
+        'perhitungan_c2'     => 'Cost',
+        'perhitungan_c3'     => 'Delivary',
+        'perhitungan_c4'     => 'Responsiveness',
     ],
 
 ];

@@ -31,7 +31,7 @@
             <div class="col-md-7 order-md-1">
                 <h4 class="mb-3">Data Sub Kriteria</h4>
                 <form class="needs-validation"
-                    action="{{ route($route, $row->sub_kriteria_id ?? null) }}"
+                    action="{{ route($route, ['sub_kriterium' => $row->sub_kriteria_id] ?? null) }}"
                     method="POST">
                     @csrf
                     @if(isset($row))

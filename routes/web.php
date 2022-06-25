@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth']], function ()
         Route::resource('sub_kriteria', SubKriteriaController::class);
         Route::resource('gap', GapController::class);
         Route::resource('profil_standar', ProfilStandarController::class);
+        Route::get('perhitungan', [PeritunganController::class, 'perhitungan'])->name('perhitungan');
+        Route::get('hasil', [PeritunganController::class, 'hasil'])->name('hasil');
         Route::resource('penilaian', PeritunganController::class);
     });
     Route::group(['middleware' => ['cek_login:pimpinan']], function ()

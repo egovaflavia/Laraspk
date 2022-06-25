@@ -23,7 +23,7 @@
                         <th>Nama Kriteria</th>
                         <th>Jenis Kriteria</th>
                         <th>Bobot</th>
-                        <th>#</th>
+                        {{-- <th>#</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +33,10 @@
                         <td>{{ $row->kriteria_nama }}</td>
                         <td>{{ $row->kriteria_jenis }}</td>
                         <td>{{ $row->kriteria_bobot }}</td>
-                        <td>
+                        {{-- <td>
                             <a class="btn btn-sm btn-warning"
-                                href="{{ route('kriteria.edit', ['kriterium' => $row]) }}">
-                                    <strong>Edit</strong></a>
+                                href="{{ route('kriteria.edit', ['kriterium' => $row->kriteria_id]) }}">
+                                    <strong>Edit</strong></a> --}}
 
                             {{-- <form action="{{ route('kriteria.destroy', ['kriterium' => $row->kriteria_id]) }}"
                                 style="display:inline-block"
@@ -49,7 +49,7 @@
                                     <strong>Hapus</strong>
                                 </button>
                             </form> --}}
-                        </td>
+                        {{-- </td> --}}
                     </tr>
                     @empty
                     <tr>

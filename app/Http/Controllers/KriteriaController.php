@@ -81,9 +81,14 @@ class KriteriaController extends Controller
      * @param  \App\Models\kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kriteria $kriteria)
+    public function edit($id)
     {
-        //
+        $kriteria = Kriteria::where('kriteria_id', $id)->first();
+        return view('page.kriteria.form',[
+            'row' => $kriteria,
+            'data' => Kriteria::latest('kriteria_id', 'DESC')->take(3)->get(),
+            'route' => 'kriteria.update'
+        ]);
     }
 
     /**
