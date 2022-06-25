@@ -1,4 +1,4 @@
--- Adminer 4.8.1 MySQL 5.7.33 dump
+-- Adminer 4.8.1 MySQL 5.5.5-10.4.22-MariaDB dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -56,7 +56,10 @@ CREATE TABLE `tb_perhitungan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `tb_perhitungan` (`perhitungan_id`, `supplier_id`, `perhitungan_c1`, `perhitungan_c2`, `perhitungan_c3`, `perhitungan_c4`) VALUES
-(1,	1,	1,	1,	1,	1);
+(6,	1,	3,	8,	12,	14),
+(7,	4,	4,	7,	11,	14),
+(8,	3,	4,	8,	12,	15),
+(9,	5,	2,	6,	10,	15);
 
 DROP TABLE IF EXISTS `tb_profil_standar`;
 CREATE TABLE `tb_profil_standar` (
@@ -65,16 +68,14 @@ CREATE TABLE `tb_profil_standar` (
   `sub_kriteria_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`profil_standar_id`),
   KEY `kriteria_id` (`kriteria_id`),
-  KEY `sub_kriteria_id` (`sub_kriteria_id`),
-  CONSTRAINT `tb_profil_standar_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `tb_kriteria` (`kriteria_id`),
-  CONSTRAINT `tb_profil_standar_ibfk_2` FOREIGN KEY (`sub_kriteria_id`) REFERENCES `tb_sub_kriteria` (`sub_kriteria_id`)
+  KEY `sub_kriteria_id` (`sub_kriteria_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `tb_profil_standar` (`profil_standar_id`, `kriteria_id`, `sub_kriteria_id`) VALUES
 (1,	1,	1),
-(2,	2,	2),
-(3,	3,	3),
-(4,	4,	4);
+(2,	2,	8),
+(3,	3,	10),
+(4,	4,	14);
 
 DROP TABLE IF EXISTS `tb_sub_kriteria`;
 CREATE TABLE `tb_sub_kriteria` (
@@ -118,7 +119,8 @@ CREATE TABLE `tb_supplier` (
 INSERT INTO `tb_supplier` (`supplier_id`, `supplier_nama`, `supplier_alamat`, `supplier_email`, `supplier_notlp`) VALUES
 (1,	'Deserunt expedita et',	'Dignissimos quasi es',	'tukoq@mailinator.com',	'A sunt temporibus no'),
 (3,	'Eos ex placeat qua',	'Elit tempore adipi',	'vudife@mailinator.com',	'Deserunt consequuntu'),
-(4,	'Reiciendis est aperi',	'Soluta distinctio Q',	'bulapixanu@mailinator.com',	'Eum a ullamco aliqua');
+(4,	'Reiciendis est aperi',	'Soluta distinctio Q',	'bulapixanu@mailinator.com',	'Eum a ullamco aliqua'),
+(5,	'Sapiente asperiores',	'Duis facilis tempori',	'toqyw@mailinator.com',	'Enim lorem quia cons');
 
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
@@ -137,4 +139,4 @@ INSERT INTO `tb_user` (`id`, `name`, `email`, `username`, `level`, `password`) V
 (11,	'Adminstrator',	'admin@mail.com',	'admin',	'admin',	'$2y$10$9uDRxBWheZngmUSjAgOmO.wj6BBIGyS/i5xJ3nxYfihWV6vKSRQFO'),
 (15,	'Hiram Mcdaniel',	'pimpinan@mail.com',	'pimpinan',	'pimpinan',	'$2y$10$ghhcmq9mkWAHpXWysTp7/eZ9aDmw2RYny.0rlyL7NX4RMRvDCfsPG');
 
--- 2022-06-24 10:27:10
+-- 2022-06-25 10:55:37

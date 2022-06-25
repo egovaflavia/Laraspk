@@ -29,9 +29,9 @@
 
             </div>
             <div class="col-md-7 order-md-1">
-                <h4 class="mb-3">Data User</h4>
+                <h4 class="mb-3">Data Penilaian</h4>
                 <form class="needs-validation"
-                    action="{{ route($route, $row->id ?? null) }}"
+                    action="{{ route($route, $row->perhitungan_id ?? null) }}"
                     method="POST">
                     @csrf
                     @if(isset($row))
@@ -41,7 +41,7 @@
                     @if (isset($row))
                     <div class="form-group">
                         <label for="name">Supplier</label>
-                        <h4>{{ $row->supplier_id }} </h4>
+                        <input type="text" class="form-control" value="{{ $row->relSupplier->supplier_nama }}" disabled>
                     </div>
                     @else
                         @if (isset($suppliers))
@@ -83,14 +83,14 @@
                                 id="perhitungan_c1" required>
                                 <option value="">Pilih</option>
                                 @foreach ($perhitungan_c1 as $rc1)
-                                    <option value="{{ $rc1->sub_kriteria_nilai }}">{{ $rc1->sub_kriteria_nama }}</option>
+                                    <option value="{{ $rc1->sub_kriteria_id }}"
+                                        @if (isset($row))
+                                        {{ $row->perhitungan_c1 == $rc1->sub_kriteria_id ? 'selected' : '' }}
+                                        @endif>
+                                        {{ $rc1->sub_kriteria_nama }}
+                                    </option>
                                 @endforeach
                             </select>
-                            @if (isset($row))
-                                <script>
-                                    $('#perhitungan_c1').val('{{ $row->perhitungan_c1 }}');
-                                </script>
-                            @endif
                         </div>
                     </div>
 
@@ -110,14 +110,15 @@
                                 id="perhitungan_c2" required>
                                 <option value="">Pilih</option>
                                 @foreach ($perhitungan_c2 as $rc2)
-                                    <option value="{{ $rc2->sub_kriteria_nilai }}">{{ $rc2->sub_kriteria_nama }}</option>
+                                <option value="{{ $rc2->sub_kriteria_id }}"
+                                    @if(isset($row))
+                                    {{ $row->perhitungan_c2 == $rc2->sub_kriteria_id ? 'selected' : '' }}
+                                    @endif>
+                                    {{ $rc2->sub_kriteria_nama }}
+                                </option>
                                 @endforeach
                             </select>
-                            @if (isset($row))
-                                <script>
-                                    $('#perhitungan_c2').val('{{ $row->perhitungan_c2 }}');
-                                </script>
-                            @endif
+
                         </div>
                     </div>
 
@@ -137,14 +138,15 @@
                                 id="perhitungan_c3" required>
                                 <option value="">Pilih</option>
                                 @foreach ($perhitungan_c3 as $rc3)
-                                    <option value="{{ $rc3->sub_kriteria_nilai }}">{{ $rc3->sub_kriteria_nama }}</option>
+                                <option value="{{ $rc3->sub_kriteria_id }}"
+                                    @if(isset($row))
+                                    {{ $row->perhitungan_c3 == $rc3->sub_kriteria_id ? 'selected' : '' }}
+                                    @endif>
+                                    {{ $rc3->sub_kriteria_nama }}
+                                </option>
                                 @endforeach
                             </select>
-                            @if (isset($row))
-                                <script>
-                                    $('#perhitungan_c3').val('{{ $row->perhitungan_c3 }}');
-                                </script>
-                            @endif
+
                         </div>
                     </div>
 
@@ -164,14 +166,15 @@
                                 id="perhitungan_c4" required>
                                 <option value="">Pilih</option>
                                 @foreach ($perhitungan_c4 as $rc4)
-                                    <option value="{{ $rc4->sub_kriteria_nilai }}">{{ $rc4->sub_kriteria_nama }}</option>
+                                <option value="{{ $rc4->sub_kriteria_id }}"
+                                    @if(isset($row))
+                                    {{ $row->perhitungan_c4 == $rc4->sub_kriteria_id ? 'selected' : '' }}
+                                    @endif>
+                                    {{ $rc4->sub_kriteria_nama }}
+                                </option>
                                 @endforeach
                             </select>
-                            @if (isset($row))
-                                <script>
-                                    $('#perhitungan_c4').val('{{ $row->perhitungan_c4 }}');
-                                </script>
-                            @endif
+
                         </div>
                     </div>
 

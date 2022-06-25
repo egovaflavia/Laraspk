@@ -27,21 +27,25 @@
     <div class="no-print d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">Sistem Pendukung Keputusan</h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            @guest
-                <a class="p-2 text-dark" href="{{ route('login') }}">Login</a>
-            @endguest
-            @auth
-                <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
-                <a class="p-2 text-dark" href="{{ route('user.index') }}">User</a>
-                <a class="p-2 text-dark" href="{{ route('supplier.index') }}">Supplier</a>
-                <a class="p-2 text-dark" href="{{ route('kriteria.index') }}">Kriteria</a>
-                <a class="p-2 text-dark" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a>
-                <a class="p-2 text-dark" href="{{ route('profil_standar.index') }}">Profil Standar</a>
-                <a class="p-2 text-dark" href="{{ route('gap.index') }}">GAP</a>
-                <a class="p-2 text-dark" href="{{ route('penilaian.index') }}">Penilaian</a>
-                <a class="p-2 text-dark" href="{{ route('perhitungan') }}">Perhitungan</a>
-                <a class="p-2 text-dark" href="{{ route('hasil') }}">Hasil</a>
-            @endauth
+
+            @if(Auth::user()->level == 'admin')
+            <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
+            <a class="p-2 text-dark" href="{{ route('user.index') }}">User</a>
+            <a class="p-2 text-dark" href="{{ route('supplier.index') }}">Supplier</a>
+            <a class="p-2 text-dark" href="{{ route('kriteria.index') }}">Kriteria</a>
+            <a class="p-2 text-dark" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a>
+            <a class="p-2 text-dark" href="{{ route('profil_standar.index') }}">Profil Standar</a>
+            <a class="p-2 text-dark" href="{{ route('gap.index') }}">GAP</a>
+            <a class="p-2 text-dark" href="{{ route('penilaian.index') }}">Penilaian</a>
+            <a class="p-2 text-dark" href="{{ route('perhitungan') }}">Perhitungan</a>
+            <a class="p-2 text-dark" href="{{ route('hasil') }}">Hasil</a>
+            @elseif(Auth::user()->level == 'pimpinan')
+            <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
+            <a class="p-2 text-dark" href="{{ route('penilaian.index') }}">Penilaian</a>
+            <a class="p-2 text-dark" href="{{ route('perhitungan') }}">Perhitungan</a>
+            <a class="p-2 text-dark" href="{{ route('hasil') }}">Hasil</a>
+            @endif
+
         </nav>
         @auth
             <a class="btn btn-outline-primary" href="{{ route('logout') }}">Logout</a>
@@ -63,17 +67,17 @@
                         @auth
                             <li><a class="text-muted" href="{{ route('home.index') }}">Home</a></li>
                             <li><a class="text-muted" href="{{ route('user.index') }}">User</a></li>
-                            <li><a class="text-muted" href="#">Supplier</a></li>
+                            <li><a class="text-muted" href="{{ route('supplier.index') }}">Supplier</a></li>
                         @endauth
                     </ul>
                 </div>
                 <div class="col-6 col-md">
                     <ul class="list-unstyled text-small">
                         @auth
-                            <li><a class="text-muted" href="#">Kriteira</a></li>
-                            <li><a class="text-muted" href="#">Sub Kriteria</a></li>
-                            <li><a class="text-muted" href="#">Profil Standar</a></li>
-                            <li><a class="text-muted" href="#">GAP</a></li>
+                            <li><a class="text-muted" href="{{ route('kriteria.index') }}">Kriteira</a></li>
+                            <li><a class="text-muted" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a></li>
+                            <li><a class="text-muted" href="{{ route('profil_standar.index') }}">Profil Standar</a></li>
+                            <li><a class="text-muted" href="{{ route('gap.index') }}">GAP</a></li>
                         @endauth
                     </ul>
                 </div>
@@ -83,9 +87,9 @@
                             <li><a class="text-muted" href="{{ route('login') }}">Login</a></li>
                         @endguest
                         @auth
-                            <li><a class="text-muted" href="#">Penilaian</a></li>
-                            <li><a class="text-muted" href="#">Perhitungan</a></li>
-                            <li><a class="text-muted" href="#">Hasil</a></li>
+                            <li><a class="text-muted" href="{{ route('penilaian.index') }}">Penilaian</a></li>
+                            <li><a class="text-muted" href="{{ route('perhitungan') }}">Perhitungan</a></li>
+                            <li><a class="text-muted" href="{{ route('hasil') }}">Hasil</a></li>
                             <li><a class="text-muted" href="{{ route('logout') }}">Logout</a></li>
                         @endauth
                     </ul>

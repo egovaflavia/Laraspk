@@ -96,9 +96,21 @@ class PeritunganController extends Controller
      * @param  \App\Models\Peritungan  $peritungan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Peritungan $peritungan)
+    public function edit($id)
     {
-        //
+        $dataPerhitungan = Peritungan::where('perhitungan_id', $id)->first();
+        $sub             = Sub_kriteria::all();
+        $sup             = Peritungan::pluck('supplier_id');
+        $supNot          = Supplier::whereNotIn('supplier_id', $sup)->get();
+        return view('page.penilaian.form',[
+            'row'            => $dataPerhitungan,
+            'route'          => 'penilaian.update',
+            'dataKriteria'   => Kriteria::all(),
+            'perhitungan_c1' => $sub->where('kriteria_id', 1),
+            'perhitungan_c2' => $sub->where('kriteria_id', 2),
+            'perhitungan_c3' => $sub->where('kriteria_id', 3),
+            'perhitungan_c4' => $sub->where('kriteria_id', 4),
+        ]);
     }
 
     /**
@@ -108,9 +120,14 @@ class PeritunganController extends Controller
      * @param  \App\Models\Peritungan  $peritungan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Peritungan $peritungan)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Peritungan::find($id);
+        $data->update($request->all());
+
+        return redirect()
+        ->route('penilaian.index')
+        ->with('message', 'Data berhasil di update');
     }
 
     /**
@@ -132,15 +149,15 @@ class PeritunganController extends Controller
     {
 
         $dataPerhitungan = Peritungan::all();
-        $profilStandar = Profil_standar::all();
-        $gap = Gap::all();
+        $profilStandar   = Profil_standar::all();
+        $gap             = Gap::all();
         $dataPerhitungan->map(function ($value) use  ($profilStandar, $gap)
         {
 
-            $c1 = (int)$value->perhitungan_c1 - $profilStandar->where('kriteria_id', 1)->first()->relSubKriteria->sub_kriteria_nilai;
-            $c2 = (int)$value->perhitungan_c2 - $profilStandar->where('kriteria_id', 2)->first()->relSubKriteria->sub_kriteria_nilai;
-            $c3 = (int)$value->perhitungan_c3 - $profilStandar->where('kriteria_id', 3)->first()->relSubKriteria->sub_kriteria_nilai;
-            $c4 = (int)$value->perhitungan_c4 - $profilStandar->where('kriteria_id', 4)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c1 = (int)$value->relC1->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 1)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c2 = (int)$value->relC2->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 2)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c3 = (int)$value->relC3->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 3)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c4 = (int)$value->relC4->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 4)->first()->relSubKriteria->sub_kriteria_nilai;
 
             $value->profil_c1 = $profilStandar->where('kriteria_id', 1)->first()->relSubKriteria->sub_kriteria_nilai;
             $value->profil_c2 = $profilStandar->where('kriteria_id', 2)->first()->relSubKriteria->sub_kriteria_nilai;
@@ -181,10 +198,10 @@ class PeritunganController extends Controller
         $dataPerhitungan->map(function ($value) use  ($profilStandar, $gap)
         {
 
-            $c1 = (int)$value->perhitungan_c1 - $profilStandar->where('kriteria_id', 1)->first()->relSubKriteria->sub_kriteria_nilai;
-            $c2 = (int)$value->perhitungan_c2 - $profilStandar->where('kriteria_id', 2)->first()->relSubKriteria->sub_kriteria_nilai;
-            $c3 = (int)$value->perhitungan_c3 - $profilStandar->where('kriteria_id', 3)->first()->relSubKriteria->sub_kriteria_nilai;
-            $c4 = (int)$value->perhitungan_c4 - $profilStandar->where('kriteria_id', 4)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c1 = (int)$value->relC1->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 1)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c2 = (int)$value->relC2->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 2)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c3 = (int)$value->relC3->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 3)->first()->relSubKriteria->sub_kriteria_nilai;
+            $c4 = (int)$value->relC4->sub_kriteria_nilai - $profilStandar->where('kriteria_id', 4)->first()->relSubKriteria->sub_kriteria_nilai;
 
             $value->profil_c1 = $profilStandar->where('kriteria_id', 1)->first()->relSubKriteria->sub_kriteria_nilai;
             $value->profil_c2 = $profilStandar->where('kriteria_id', 2)->first()->relSubKriteria->sub_kriteria_nilai;

@@ -32,7 +32,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function ()
 {
-    Route::group(['middleware' => ['cek_login:admin']], function ()
+    Route::group(['middleware' => ['cek_login']], function ()
     {
         Route::resource('home', HomeController::class);
         Route::resource('user', UserController::class);
@@ -45,8 +45,5 @@ Route::group(['middleware' => ['auth']], function ()
         Route::get('hasil', [PeritunganController::class, 'hasil'])->name('hasil');
         Route::resource('penilaian', PeritunganController::class);
     });
-    Route::group(['middleware' => ['cek_login:pimpinan']], function ()
-    {
-        Route::resource('pimpinan', HomeController::class);
-    });
+
 });

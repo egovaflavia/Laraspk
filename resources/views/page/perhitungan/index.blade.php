@@ -54,10 +54,10 @@
                     <tr>
                         <td>{{ ++$no }}</td>
                         <td>{{ $row->relSupplier->supplier_nama }}</td>
-                        <td>{{ $row->perhitungan_c1 }}</td>
-                        <td>{{ $row->perhitungan_c2 }}</td>
-                        <td>{{ $row->perhitungan_c3 }}</td>
-                        <td>{{ $row->perhitungan_c4 }}</td>
+                        <td>{{ $row->relC1->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relC2->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relC3->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relC4->sub_kriteria_nilai }}</td>
                     </tr>
                     @empty
                     <tr>
@@ -84,10 +84,10 @@
                     <tr>
                         <td>{{ ++$no }}</td>
                         <td>{{ $row->relSupplier->supplier_nama }}</td>
-                        <td>{{ $row->perhitungan_c1 }}</td>
-                        <td>{{ $row->perhitungan_c2 }}</td>
-                        <td>{{ $row->perhitungan_c3 }}</td>
-                        <td>{{ $row->perhitungan_c4 }}</td>
+                        <td>{{ $row->relC1->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relC2->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relC3->sub_kriteria_nilai }}</td>
+                        <td>{{ $row->relC4->sub_kriteria_nilai }}</td>
                     </tr>
                     @empty
                     <tr>
